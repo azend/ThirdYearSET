@@ -1,0 +1,27 @@
+a) Provide a brief description of the game you reviewed, including its name, format, number of players, intended age/market, genre, etc.
+
+Cards Against Humanity is a card game for horrible people. It is designed for up to 16 sick humoured adults.
+
+The game is played with a special deck of cards. The cards are divided into two different piles based on their colour; Black or white. Black cards contain some sort of a sentence or phrase with at least one or many fill in spaces. This is where the white cards come in. White cards are generally arbitrary statements that you can use to fill in the spaces in the black cards. The objective of the game is to come up with the most horrible and/or funny statement with a black card and a white card for every space. Your statement is then judged by a jury of your other players to see if it is most horrible.
+
+Cards Against Humanity actually has a very interesting history. Unlike most other games, this game was not funded under a mass production games company like Warner Brothers. The money to make this game actually came from a online kickstarter campaign funded by people around the world. In fact, as promised in the campaign, the original card sets funded by the campaign are licensed under Creative Commons and are available to download and print directly from the Cards Against Humanity website.
+
+b) Try to start a game. How long did it take to start a game, make characters, or get enough of the game rules under your belt in order to start play? This answer will change depending on your game, of course, but understand that we’re asking about that learning curve to get going with the product.
+
+Cards Against Humanity is a very easy game to get started with and, while turns do last longer, has almost the simplicity of blackjack. The full set of game rules fully formatted fits on a single letter sized sheet of paper and the important parts take up only a quarter of that.
+
+As mentioned above, the rise in the learning curve from someone who has never played to an expert is pretty small. Personally, for many years the only game I could play and follow the instructions was UNO. Cards Against Humanity is simpler. After you've learned the basic game logic, the only limit is your own personality.
+
+c) Imagine you are going to convert this game into a video game (e.g. think about your Back/Box and GDD as well) and briefly describe 2-3 major challenges you foresee with doing so successfully. Will this be too intense a game to simulate? What about artistic assets? Multiplayer requirements versus AI? Etc. Think about SOFTWARE based challenges versus things like getting a license to a popular movie.
+
+1) The horribleness
+
+The cornerstone of this game which makes it interesting is that it exposes how terrible most people truely are. However, if this game were to made into a video game, I think some very important aspects might be lost.
+
+Take Call of Duty for example. In just about any game of Call of Duty, there is usually at least one person yelling inflammatory phrases. Now most people who play the game regularly know this and take little offense. In a game like Cards Against Humanity however, the sheer reason to play the game is derived from the person to person context from which horrible phrases are uttered. If Cards Against Humanity were do become some sort of massively multiplayer online game where there is no context between one player and the next, it would lose its enjoyability very quickly.
+
+2) AI
+
+Cards Against Humanity is a difficult game for even smart people to play _well_. This is not because the game logic is in any way hard but because thinking of phrases which create the most horrific impact. This is because not only do you have to pick something which you think is horrible but also because what you have selected has to be most effective the context of your players.
+
+While I'm sure one could get pretty far with an AI that selects card pairs based on known funny ones from a database or even through a random card selector, I don't think it would be nearly as good to play with as a real human being. In future years perhaps we will be able to make a smarter AI which can do real time processing and understanding of sentences and context but until then we're just not there yet.
