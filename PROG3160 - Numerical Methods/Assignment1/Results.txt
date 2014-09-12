@@ -1,27 +1,44 @@
-What is X? 0.2
-What is K? 7
-x = 0.2, k = 7, i = 4, sum = 1.111
-x = 0.2, k = 7, i = 5, sum = 1.1111
-x = 0.2, k = 7, i = 6, sum = 1.11111
-x = 0.2, k = 7, i = 7, sum = 1.111111
+What is X? What is K? 
+Fraction = 1.111111
 
-What is X? 0.4
-What is K? 7
-x = 0.4, k = 7, i = 4, sum = 1.248
-x = 0.4, k = 7, i = 5, sum = 1.2496
-x = 0.4, k = 7, i = 6, sum = 1.2499200000000001
-x = 0.4, k = 7, i = 7, sum = 1.2499840000000002
+Approximations:
+x = 0.2, k = 7, i = 1, sum = 1.000000 error = 1.00e+01
+x = 0.2, k = 7, i = 2, sum = 1.100000 error = 1.00e+00
+x = 0.2, k = 7, i = 3, sum = 1.110000 error = 1.00e-01
+x = 0.2, k = 7, i = 4, sum = 1.111000 error = 1.00e-02
+x = 0.2, k = 7, i = 5, sum = 1.111100 error = 1.00e-03
+x = 0.2, k = 7, i = 6, sum = 1.111110 error = 1.00e-04
+x = 0.2, k = 7, i = 7, sum = 1.111111 error = 1.00e-05
+What is X? What is K? 
+Fraction = 1.250000
 
-What is X? 0.6
-What is K? 7
-x = 0.6, k = 7, i = 4, sum = 1.417
-x = 0.6, k = 7, i = 5, sum = 1.4251
-x = 0.6, k = 7, i = 6, sum = 1.42753
-x = 0.6, k = 7, i = 7, sum = 1.428259
+Approximations:
+x = 0.4, k = 7, i = 1, sum = 1.000000 error = 2.00e+01
+x = 0.4, k = 7, i = 2, sum = 1.200000 error = 4.00e+00
+x = 0.4, k = 7, i = 3, sum = 1.240000 error = 8.00e-01
+x = 0.4, k = 7, i = 4, sum = 1.248000 error = 1.60e-01
+x = 0.4, k = 7, i = 5, sum = 1.249600 error = 3.20e-02
+x = 0.4, k = 7, i = 6, sum = 1.249920 error = 6.40e-03
+x = 0.4, k = 7, i = 7, sum = 1.249984 error = 1.28e-03
+What is X? What is K? 
+Fraction = 1.428571
 
-What is X? 0.8
-What is K? 7
-x = 0.8, k = 7, i = 4, sum = 1.624
-x = 0.8, k = 7, i = 5, sum = 1.6496000000000002
-x = 0.8, k = 7, i = 6, sum = 1.6598400000000002
-x = 0.8, k = 7, i = 7, sum = 1.6639360000000003
+Approximations:
+x = 0.6, k = 7, i = 1, sum = 1.000000 error = 3.00e+01
+x = 0.6, k = 7, i = 2, sum = 1.300000 error = 9.00e+00
+x = 0.6, k = 7, i = 3, sum = 1.390000 error = 2.70e+00
+x = 0.6, k = 7, i = 4, sum = 1.417000 error = 8.10e-01
+x = 0.6, k = 7, i = 5, sum = 1.425100 error = 2.43e-01
+x = 0.6, k = 7, i = 6, sum = 1.427530 error = 7.29e-02
+x = 0.6, k = 7, i = 7, sum = 1.428259 error = 2.19e-02
+What is X? What is K? 
+Fraction = 1.666667
+
+Approximations:
+x = 0.8, k = 7, i = 1, sum = 1.000000 error = 4.00e+01
+x = 0.8, k = 7, i = 2, sum = 1.400000 error = 1.60e+01
+x = 0.8, k = 7, i = 3, sum = 1.560000 error = 6.40e+00
+x = 0.8, k = 7, i = 4, sum = 1.624000 error = 2.56e+00
+x = 0.8, k = 7, i = 5, sum = 1.649600 error = 1.02e+00
+x = 0.8, k = 7, i = 6, sum = 1.659840 error = 4.10e-01
+x = 0.8, k = 7, i = 7, sum = 1.663936 error = 1.64e-01
