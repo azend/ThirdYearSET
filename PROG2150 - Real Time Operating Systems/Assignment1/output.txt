@@ -1,0 +1,24 @@
+Allocating memory for pthread_ts
+Initializing a pthread barrier to not quit until 3 waits
+Spawning thread for function lockSleepUnlock
+Starting lockSleepUnlock
+lockSleepUnlock thread waiting for sleepMutex lock
+lockSleepUnlock thread acquired lock on sleepMutex
+Spawning thread for function sleepLockSleepUnlock
+Starting sleepLockSleepUnlock
+Spawning thread for function sleepTryLockSleepUnlock
+Starting sleepTryLockSleepUnlock
+Starting process to join lockSleepUnlock thread with the main thread
+sleepLockSleepUnlock thread waiting for sleepMutex lock
+sleepTryLockSleepUnlock thread trying to lock mutex
+sleepTryLockSleepUnlock couldn't lock sleepMutex
+sleepTryLockSleepUnlock waiting at the barrier
+lockSleepUnlock finished work and is unlocking sleepmMutex
+lockSleepUnlock has finished unlocking sleepMutex
+lockSleepUnlock ending
+sleepLockSleepUnlock thread acquired lock on sleepMutex
+Main thread waiting at the barrier
+sleepLockSleepUnlock finished work and is unlocking sleepmMutex
+sleepLockSleepUnlock has finished unlocking sleepMutex
+sleepLockSleepUnlock waiting at the barrier
+sleepLockSleepUnlock ending
