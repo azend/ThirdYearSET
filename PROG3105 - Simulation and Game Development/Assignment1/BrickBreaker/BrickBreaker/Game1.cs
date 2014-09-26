@@ -62,14 +62,24 @@ namespace BrickBreaker
                 {
                     bricks[x, y] = new Brick();
                     bricks[x, y].Position = new Vector3(
-                        ((graphics.GraphicsDevice.Viewport.Width - (graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH * 2)) / NUM_BRICKS_X) * x,
-                        ((graphics.GraphicsDevice.Viewport.Height - (graphics.GraphicsDevice.Viewport.Height * PERCENTAGE_WALL_WIDTH * 2)) / NUM_BRICKS_Y) * y + (graphics.GraphicsDevice.Viewport.Height * PERCENTAGE_WALL_WIDTH * 3), 
+                        ((graphics.GraphicsDevice.Viewport.Width - (graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH * 2)) / NUM_BRICKS_X) * x + (graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH) + x * 2 ,
+                        ((graphics.GraphicsDevice.Viewport.Height / 4) / NUM_BRICKS_Y) * y + (graphics.GraphicsDevice.Viewport.Height * PERCENTAGE_WALL_WIDTH) + y * 2, 
                         0f
                     );
                     bricks[x, y].Size = new Vector2(
                         (graphics.GraphicsDevice.Viewport.Width - (graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH * 2)) / NUM_BRICKS_X,
-                        (graphics.GraphicsDevice.Viewport.Height - (graphics.GraphicsDevice.Viewport.Height * PERCENTAGE_WALL_WIDTH * 2)) / NUM_BRICKS_Y
+                        (graphics.GraphicsDevice.Viewport.Height / 4) / NUM_BRICKS_Y
                     );
+
+                    //bricks[x, y].Position = new Vector3(
+                    //    ((graphics.GraphicsDevice.Viewport.Width - (graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH * 2)) / NUM_BRICKS_X) * x,
+                    //    ((graphics.GraphicsDevice.Viewport.Height - (graphics.GraphicsDevice.Viewport.Height * PERCENTAGE_WALL_WIDTH * 2)) / NUM_BRICKS_Y) * y + (graphics.GraphicsDevice.Viewport.Height * PERCENTAGE_WALL_WIDTH * 3),
+                    //    0f
+                    //);
+                    //bricks[x, y].Size = new Vector2(
+                    //    (graphics.GraphicsDevice.Viewport.Width - (graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH * 2)) / NUM_BRICKS_X,
+                    //    (graphics.GraphicsDevice.Viewport.Height - (graphics.GraphicsDevice.Viewport.Height * PERCENTAGE_WALL_WIDTH * 2)) / NUM_BRICKS_Y
+                    //);
                 }
             }
 

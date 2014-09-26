@@ -55,6 +55,9 @@
   <ItemGroup />
   <ItemGroup>
     <Compile Include="Brick.cs" />
+    <None Include="Content\Ball.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Brick.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
