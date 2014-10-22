@@ -1,0 +1,170 @@
+<SoapRequest>
+  <WebService pName = "NumberConversion">
+    <Target>http://www.dataaccess.com/webservicesserver/</Target>
+    <Address>http://www.dataaccess.com/webservicesserver/numberconversion.wso</Address>
+    <WebMethod pName="NumberToWords" >
+      <element>tns:NumberToWords</element>
+      <Input>
+        <Value pName = "Number To Convert">
+          <Name>ubiNum</Name>
+          <Type>xs:unsignedLong</Type>
+        </Value>
+      </Input>
+      <Output>
+        <Name>NumberToWordsResponse</Name>
+        <Value pName = "Converted Number">
+          <Name>NumbersToWordsResult</Name>
+          <Type>xs:string</Type>
+        </Value>
+      </Output>
+    </WebMethod>
+  <WebMethod pName="NumberToDollars" >
+      <element>tns:NumberToDollars</element>
+      <Input>
+        <Value pName = "Number To Convert">
+          <Name>dNum</Name>
+          <Type>xs:decimal</Type>
+        </Value>
+      </Input>
+      <Output>
+        <Name>NumberToDollarsResponse</Name>
+        <Value pName = "Converted Dollar Amount">
+          <Name>NumbersToDollarsResult</Name>
+          <Type>xs:string</Type>
+        </Value>
+      </Output>
+    </WebMethod>
+  </WebService>
+  <WebService pName = "CountryInfoService">
+    <Target>http://www.oorsprong.org/websamples.countryinfo</Target>
+    <Address>http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso</Address>
+    <WebMethod pName="ListOfCountryNamesByName" >
+      <element>tns:ListOfAllCountryNamesByName</element>
+      <Input></Input>
+      <Output>
+        <Name>ListOfCountryNamesByNameResponse</Name>
+        <Value pName = "Country Names">
+          <Name>ListOfCountryNamesByNameResult</Name>
+          <Type>tns:ArrayOftCountryCodeAndName</Type>
+        </Value>
+      </Output>
+    </WebMethod>
+    <WebMethod pName="CapitalCity" >
+      <element>tns:CapitalCity</element>
+      <Input>
+        <Value pName = "Country ISO Code">
+          <Name>sCountryISOCode</Name>
+          <Type>xs:string</Type>
+        </Value>
+      </Input>
+      <Output>
+        <Name>CapitalCityResponse</Name>
+        <Value pName = "Capital City">
+          <Name>CapitalCityResult</Name>
+          <Type>xs:string</Type>
+        </Value>
+      </Output>
+    </WebMethod>
+    <WebMethod pName="ListOfCurrenciesByName" >
+      <element>tns:ListOfCurrenciesByName</element>
+      <Input></Input>
+      <Output>
+        <Name>ListOfCountryNamesByNameResponse</Name>
+        <Value pName = "List of Currencies">
+          <Name>ListOfCurrenciesByNameResult</Name>
+          <Type>tns:ArrayOftCurrency</Type>
+        </Value>
+      </Output>
+    </WebMethod>
+    <WebMethod pName="CountryISOCode" >
+      <element>tns:CountryISOCode</element>
+      <Input>
+        <Value pName = "Country Name">
+          <Name>sCountryName</Name>
+          <Type>xs:string</Type>
+        </Value>
+      </Input>
+      <Output>
+        <Name>CountryISOCodeResponse</Name>
+        <Value pName = "Country ISO Code">
+          <Name>CountryISOCodeResult</Name>
+          <Type>xs:string</Type>
+        </Value>
+      </Output>
+    </WebMethod>
+  </WebService>
+  <WebService pName = "Football Pool">
+    <Target>http://footballpool.dataaccess.eu</Target>
+    <Address>http://footballpool.dataaccess.eu/data/ofni.wso</Address>
+    <WebMethod pName="AllPlayerNames" >
+      <element>tns:NumberToWords</element>
+      <Input>
+        <Value pName = "Something..">
+          <Name>bSelected</Name>
+          <Type>xs:boolean</Type>
+        </Value>
+      </Input>
+      <Output>
+        <Name>AllPlayerNamesResponse</Name>
+        <Value pName = "All Player Names">
+          <Name>AllPlayerNamesResult</Name>
+          <Type>tns:ArrayOftPlayerNames</Type>
+        </Value>
+      </Output>
+    </WebMethod>
+    <WebMethod pName="TopSelectedGoalScorers" >
+      <element>tns:TopSelectedGoalScorers</element>
+      <Input>
+        <Value pName = "Num Goal Scorers">
+          <Name>iTopN</Name>
+          <Type>xs:int</Type>
+        </Value>
+      </Input>
+      <Output>
+        <Name>TopSelectedGoalScorersResponse</Name>
+        <Value pName = "Top Selected Goal Scorers">
+          <Name>TopSelectedGoalScorersResult</Name>
+          <Type>tns:ArrayOftTopSelectedGoalScorer</Type>
+        </Value>
+      </Output>
+    </WebMethod>
+    <WebMethod pName="StadiumNames" >
+      <element>tns:TopSelectedGoalScorers</element>
+      <Input></Input>
+      <Output>
+        <Name>StadiumNamesResponse</Name>
+        <Value pName = "Top Selected Goal Scorers">
+          <Name>StadiumNamesResult</Name>
+          <Type>tns:ArrayOfString</Type>
+        </Value>
+      </Output>
+    </WebMethod>
+    <WebMethod pName="StadiumInfo" >
+      <element>tns:TopSelectedGoalScorers</element>
+      <Input>
+        <Value pName="Stadium Name">
+          <Name>sStadiumName</Name>
+          <Type>xs:string</Type>
+        </Value>
+      </Input>
+      <Output>
+        <Name>StadiumInfoResponse</Name>
+        <Value pName = "Stadium Info">
+          <Name>StadiumInfoResult</Name>
+          <Type>tns:tStadiumInfo</Type>
+        </Value>
+      </Output>
+    </WebMethod>
+    <WebMethod pName="Teams" >
+      <element>tns:Teams</element>
+      <Input></Input>
+      <Output>
+        <Name>TeamsResponse</Name>
+        <Value pName = "Teams">
+          <Name>TeamsResult</Name>
+          <Type>tns:ArrayOftTeamInfo</Type>
+        </Value>
+      </Output>
+    </WebMethod>
+  </WebService>
+</SoapRequest>
