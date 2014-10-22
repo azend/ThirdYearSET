@@ -16,8 +16,13 @@ namespace BrickBreaker
     /// </summary>
     public class Game1 : Game
     {
+        KeyboardState oldKeyboardState;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Random rand;
+
+        GameState env;
+        HUD hud;
 
         Wall topWall;
         Wall leftWall;
@@ -29,11 +34,16 @@ namespace BrickBreaker
 
         const float PERCENTAGE_WALL_WIDTH = 0.1f;
 
+        Ball ball;
+
+        Paddle paddle;
+
         public Game1()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            rand = new Random();
         }
 
         /// <summary>
@@ -44,20 +54,31 @@ namespace BrickBreaker
         /// </summary>
         protected override void Initialize()
         {
-            topWall = new Wall();
-            topWall.Size = new Vector2(graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height * PERCENTAGE_WALL_WIDTH);
+            env = new GameState();
 
-            leftWall = new Wall();
-            leftWall.Size = new Vector2(graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH, graphics.GraphicsDevice.Viewport.Height);
+            topWall = new Wall(
+            new Vector2(graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height * PERCENTAGE_WALL_WIDTH),
+            new Vector3(0f, 0f, 0f),
+            Color.Green
+                );
 
-            rightWall = new Wall();
-            rightWall.Position = new Vector3(graphics.GraphicsDevice.Viewport.Width - (graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH), 0, 0);
-            rightWall.Size = new Vector2(graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH, graphics.GraphicsDevice.Viewport.Height);
+            leftWall = new Wall(
+            new Vector2(graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH, graphics.GraphicsDevice.Viewport.Height),
+            new Vector3(0f, 0f, 0f),
+            Color.Green
+            );
+
+            rightWall = new Wall(
+                new Vector2(graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH, graphics.GraphicsDevice.Viewport.Height),
+                new Vector3(graphics.GraphicsDevice.Viewport.Width - (graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH), 0, 0),
+                Color.Green);
+
 
 
 
             for (int y = 0; y < NUM_BRICKS_Y; y++)
             {
+                
                 for (int x = 0; x < NUM_BRICKS_X; x++)
                 {
                     bricks[x, y] = new Brick();
@@ -83,8 +104,24 @@ namespace BrickBreaker
                 }
             }
 
+            ball = new Ball();
 
-                base.Initialize();
+            LaunchBall();
+
+            paddle = new Paddle();
+            paddle.Size = new Vector2(80, 10);
+            paddle.Position = new Vector3(graphics.GraphicsDevice.Viewport.Width / 2 - paddle.Size.X / 2, graphics.GraphicsDevice.Viewport.Height - 80 - paddle.Size.Y / 2, 0);
+
+            hud = new HUD(env);
+            hud.Position = new Vector3((graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH) / 2, (graphics.GraphicsDevice.Viewport.Height * PERCENTAGE_WALL_WIDTH) / 4, 0);
+
+            GameState state = new GameState();
+            state.Save("state.txt");
+            
+
+            oldKeyboardState = Keyboard.GetState();
+
+            base.Initialize();
         }
 
         /// <summary>
@@ -96,7 +133,9 @@ namespace BrickBreaker
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Wall.Texture = Content.Load<Texture2D>("Wall");
+            topWall.Texture = Content.Load<Texture2D>("Wall");
+            leftWall.Texture = Content.Load<Texture2D>("Wall");
+            rightWall.Texture = Content.Load<Texture2D>("Wall");
 
             Texture2D brickTexture = Content.Load<Texture2D>("Brick");
             for (int y = 0; y < NUM_BRICKS_Y; y++)
@@ -106,9 +145,15 @@ namespace BrickBreaker
                     bricks[x, y].Texture = brickTexture;
                 }
             }
-            
 
-            // TODO: use this.Content to load your game content here
+            ball.Texture = Content.Load<Texture2D>("Ball");
+
+            paddle.Texture = Content.Load<Texture2D>("Ball");
+
+
+            hud.Font = Content.Load<SpriteFont>("menufont");
+
+            
         }
 
         /// <summary>
@@ -117,7 +162,7 @@ namespace BrickBreaker
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            
         }
 
         /// <summary>
@@ -130,9 +175,43 @@ namespace BrickBreaker
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            UpdateInput();
+
+            DetectCollisions();
+            UpdateLives();
+            UpdateScore();
+
+            
+
+            ball.Update();
+
+            paddle.Update();
+
+            hud.Update();
+
+            
 
             base.Update(gameTime);
+        }
+
+        private void UpdateInput()
+        {
+            KeyboardState newKeyboardState = Keyboard.GetState();
+
+            if (newKeyboardState.IsKeyDown(Keys.A) && !oldKeyboardState.IsKeyDown(Keys.A))
+            {
+                paddle.MoveLeft();
+            }
+            else if (newKeyboardState.IsKeyDown(Keys.D) && !oldKeyboardState.IsKeyDown(Keys.D))
+            {
+                paddle.MoveRight();
+            }
+            else if (!newKeyboardState.IsKeyDown(Keys.A) && !newKeyboardState.IsKeyDown(Keys.D))
+            {
+                paddle.MoveStop();
+            }
+
+            oldKeyboardState = newKeyboardState;
         }
 
         /// <summary>
@@ -157,9 +236,105 @@ namespace BrickBreaker
                 }
             }
 
+            ball.Draw(spriteBatch);
+
+            paddle.Draw(spriteBatch);
+
+            hud.Draw(spriteBatch);
+
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
+
+        private void DetectCollisions()
+        {
+            TestCollision(ball, hud);
+
+            TestCollision(ball, topWall);
+            TestCollision(ball, leftWall);
+            TestCollision(ball, rightWall);
+
+            foreach (Brick brick in bricks)
+            {
+                TestCollision(ball, brick);
+            }
+
+            TestCollision(ball, paddle);
+        }
+
+        private void TestCollision(AbstractGameObject obj1, AbstractGameObject obj2)
+        {
+            //
+            // Warning: This should really be the responsibility of the object to perform the action
+            // but it has yet to be migrated.
+            //
+
+            if (obj1.DetectCollision(obj2))
+            {
+                // Check for collision action
+                if (obj1.OnCollision != null)
+                {
+                    obj1.OnCollision.React(obj1, obj2);
+                }
+
+                if (obj2.OnCollision != null)
+                {
+                    obj2.OnCollision.React(obj2, obj1);
+                }
+            }
+        }
+
+        private void LaunchBall()
+        {
+            //ball.Position = new Vector3(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Width - graphics.GraphicsDevice.Viewport.Width * PERCENTAGE_WALL_WIDTH, 0.0f);
+            ball.Position = new Vector3(200, 200, 0);
+            ball.Size = new Vector2(50, 50);
+            ball.Move = new Vector3(1f, -1f, 0);
+            //ball.Move = new Vector3(1f, 0f, 0);
+        }
+
+        private bool CheckIfOnMap(AbstractGameObject obj)
+        {
+            bool isOnMap = false;
+
+            Rectangle screenBounds = new Rectangle(
+                graphics.GraphicsDevice.Viewport.X,
+                graphics.GraphicsDevice.Viewport.Y,
+                graphics.GraphicsDevice.Viewport.Width,
+                graphics.GraphicsDevice.Viewport.Height
+            );
+
+            if (screenBounds.Contains(new Point((int)ball.Position.X, (int)ball.Position.Y)))
+            {
+                isOnMap = true;
+            }
+
+            return isOnMap;
+        }
+
+        private void UpdateLives()
+        {
+            if (!CheckIfOnMap(ball))
+            {
+                env.Lives--;
+                LaunchBall();
+            }
+        }
+
+        private void UpdateScore()
+        {
+            int score = 0;
+            foreach (Brick brick in bricks)
+            {
+                if (!brick.Show)
+                {
+                    score += brick.BreakValue;
+                }
+            }
+            env.Points = score;
+        }
     }
+
+
 }

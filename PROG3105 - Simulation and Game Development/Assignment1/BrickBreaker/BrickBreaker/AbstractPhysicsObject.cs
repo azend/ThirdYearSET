@@ -15,7 +15,10 @@ namespace BrickBreaker
             Move = new Vector3();
         }
 
-        public override abstract void Update();
-        public override abstract void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch sb);
+        public override void Update()
+        {
+            Position += Move;
+        }
+
     }
 }
