@@ -1,0 +1,6 @@
+<h1>Create New Post</h1>
+<%= form_for Post.new, url: posts_path do |f| %>
+	<%= f.text_field :title %>
+	<%= f.text_area :body %>
+	<%= f.submit "Create" %>
+<% end %>
