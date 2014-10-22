@@ -1,0 +1,6 @@
+[submodule "PROG2030 - Network Application Design/sample_app"]
+	path = PROG2030 - Network Application Design/sample_app
+	url = /Users/azend/Downloads/workspace/sample_app/
+[submodule "PROG2030 - Network Application Design/Assignment4/sample_app"]
+	path = PROG2030 - Network Application Design/Assignment4/sample_app
+	url = /Users/azend/Downloads/workspace/sample_app/
