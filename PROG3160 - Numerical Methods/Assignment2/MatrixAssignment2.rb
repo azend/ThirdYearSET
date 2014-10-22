@@ -1,28 +1,40 @@
+require 'matrix'
 
-
-a = [
-	[2, 1, -3, -2, 4, 1, 5],
-	[5, -1, 2, 7, -2, 6, -3],
-	[2, 4, -1, 1, 5, -3, -2],
-	[1, -2, 3, -1, -5, -1, 6],
-	[3, 1, 2, -4, 7, 2, 3],
-	[4, 5, -1, 3, 9, -3, -5],
-	[-9, 1, -3, 5, 4, -2, 8]
+a = Matrix[
+	[2, 1, -3, -2, 2, 1, 5],
+	[5, -1, 2, 7, -9, 6, -3],
+	[2, 4, -1, 1, 4, -3, -2],
+	[1, -2, 3, -1, 3, -1, 6],
+	[3, 1, 2, -4, -12, 2, 3],
+	[4, 5, -1, 3, -3, -3, -5],
+	[-9, 1, -3, 5, 7, -2, 8]
 ];
 
-b = [
+b = Matrix[
+	[-18],
+	[78],
+	[-37],
+	[-6],
+	[92],
 	[2],
-	[20],
-	[-3],
-	[2],
-	[34],
-	[2],
-	[4]
+	[-46]
 ];
+
+
+
+
+
+
+
+
+
+
+
+
 
 def print_matrix(matrix)
 	matrix.each do |k|
-		puts(k.collect_concat { |i| '%.2f' % i } .join(' | '));
+		puts("| #{k.collect_concat { |i| '%.2f' % i } .join(' | ')} |");
 	end
 end
 
@@ -191,28 +203,33 @@ end
 
 
 puts 'Matrix A';
-print_matrix(a);
+#print_matrix(a);
+print_matrix(a.to_a);
 
 puts ''
 
 puts 'Matrix B';
-print_matrix(b);
+#print_matrix(b);
+print_matrix(b.to_a);
 
 
 puts ''
 
 puts 'Performing operation A^-1 * A * X = A^-1 * B'
 puts 'Inverting matrix...'
-a_inverted = matrix_invert(a);
+#a_inverted = matrix_invert(a);
+a_inverted = a.inv;
 
 puts ''
 
 puts 'Performing operation X = A^-1 * B'
 puts 'Multiplying matricies...'
-x = matrix_multiply(a_inverted, b);
+#x = matrix_multiply(a_inverted, b);
+x = a_inverted * b;
 
 puts ''
 
 puts 'Matrix X'
-print_matrix(matrix_multiply(a_inverted, b));
+#print_matrix(matrix_multiply(a_inverted, b));
+print_matrix(x.to_a);
 
