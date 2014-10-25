@@ -13,10 +13,12 @@ namespace MidtermTakeTwo
 {
     public partial class Form1 : Form
     {
-        private List<double> coefficients = new List<double>();
-        private List<TextBox> coeffecientTextBoxes = new List<TextBox>();
-        private Dictionary<double, double> points = new Dictionary<double, double>();
-        private Dictionary<double, double>.Enumerator pointsAnimationEnumerator;
+        private List<double> xCoefficients = new List<double>();
+        private List<TextBox> xCoeffecientTextBoxes = new List<TextBox>();
+        private List<double> yCoefficients = new List<double>();
+        private List<TextBox> yCoeffecientTextBoxes = new List<TextBox>();
+
+        private double pointsTime = 0;
 
         private PlotSettings plotSettings = new PlotSettings();
         private PlotSettingsForm plotSettingsForm = null;
@@ -36,9 +38,13 @@ namespace MidtermTakeTwo
         }
 
         private void SetupCoefficientTextBoxList() {
-            coeffecientTextBoxes.Add(tbXSquared);
-            coeffecientTextBoxes.Add(tbX);
-            coeffecientTextBoxes.Add(tbConstant);
+            xCoeffecientTextBoxes.Add(tbXSquared);
+            xCoeffecientTextBoxes.Add(tbX);
+            xCoeffecientTextBoxes.Add(tbXConstant);
+
+            yCoeffecientTextBoxes.Add(tbYSquared);
+            yCoeffecientTextBoxes.Add(tbY);
+            yCoeffecientTextBoxes.Add(tbYConstant);
         }
 
         private void CalculateFunction()
@@ -46,8 +52,6 @@ namespace MidtermTakeTwo
             ResetCoefficients();
 
             GetPolynomialCoefficients();
-
-            points = PlotGraph(plotSettings.MinX, plotSettings.MaxX);
 
 
             StartGraphing();
@@ -73,8 +77,7 @@ namespace MidtermTakeTwo
         private void StartGraphing() {
             chart1.Series.First().Points.Clear();
 
-            pointsAnimationEnumerator = points.GetEnumerator();
-            pointsAnimationEnumerator.MoveNext();
+            pointsTime = 0;
 
             timerAnimation.Enabled = true;
         }
@@ -86,34 +89,59 @@ namespace MidtermTakeTwo
 
         }
 
-        private void GraphEnumerationPoint()
+        private void GraphPoint()
         {
-            KeyValuePair<double, double> current = pointsAnimationEnumerator.Current;
 
-            double x = current.Key;
-            double y = current.Value;
+            double x = PlotPoint(xCoefficients, pointsTime);
+            double y = PlotPoint(yCoefficients, pointsTime);
 
-            chart1.Series.First().Points.AddXY(x, y);
+            DataPoint dataPoint = new DataPoint(x, y);
+            dataPoint.MarkerImage = "ball.png";
+
+            if (chart1.Series.First().Points.Count > 0)
+            {
+                chart1.Series.First().Points.Last().MarkerImage = String.Empty;
+            }
+
+            chart1.Series.First().Points.Add(dataPoint);
+
+            
 
 
-            if (!pointsAnimationEnumerator.MoveNext())
+            if ( pointsTime >= plotSettings.MaxX)
             {
                 StopGraphing();
+            }
+            else
+            {
+                pointsTime += 0.1;
             }
         }
 
         private void GetPolynomialCoefficients()
         {
-            foreach (TextBox tb in coeffecientTextBoxes)
+            foreach (TextBox tb in xCoeffecientTextBoxes)
             {
                 double value = GetDoubleFromTextBox(tb);
 
-                if (value == 0 && coefficients.Count == 0)
+                if (value == 0 && xCoefficients.Count == 0)
                 {
                     continue;
                 }
 
-                coefficients.Add(value);
+                xCoefficients.Add(value);
+            }
+
+            foreach (TextBox tb in yCoeffecientTextBoxes)
+            {
+                double value = GetDoubleFromTextBox(tb);
+
+                if (value == 0 && yCoefficients.Count == 0)
+                {
+                    continue;
+                }
+
+                yCoefficients.Add(value);
             }
         }
 
@@ -136,19 +164,8 @@ namespace MidtermTakeTwo
 
             return value;
         }
-        private Dictionary<double, double> PlotGraph(double minX, double maxX, double precision = 0.1)
-        {
-            Dictionary<double, double> points = new Dictionary<double, double>();
 
-            for (double x = minX; x <= maxX; x += precision)
-            {
-                points.Add(x, PlotFAtX(x));
-            }
-
-            return points;
-        }
-
-        private double PlotFAtX(double x)
+        private double PlotPoint(List<double> coefficients, double x)
         {
             double y = 0;
 
@@ -167,13 +184,10 @@ namespace MidtermTakeTwo
 
         private void ResetCoefficients()
         {
-            coefficients.Clear();
+            xCoefficients.Clear();
+            yCoefficients.Clear();
         }
 
-        private void ResetPoints()
-        {
-            points.Clear();
-        }
 
         private void OpenSettings()
         {
@@ -202,7 +216,7 @@ namespace MidtermTakeTwo
 
         private void timerAnimation_Tick(object sender, EventArgs e)
         {
-            GraphEnumerationPoint();
+            GraphPoint();
         }
 
         private void tsbSettings_Click(object sender, EventArgs e)
